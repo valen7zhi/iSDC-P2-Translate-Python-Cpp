@@ -12,8 +12,6 @@
 #include <algorithm>
 #include "simulate.h"
 #include "localizer.cpp"
-// #include "helpers.cpp"
-
 
 /**
 Constructor for the Simulation class.
@@ -90,7 +88,6 @@ running the output.
 // 	}
 // 	cout << "map is\n";
 // 	Simulation simulation (map, 0.1, 0.9, pose);
-// 	// simulation = Simulation(map, 0.1, 0.9, pose);
 // 	cout << "initialization success!\n";
 // 	show_grid(map);
 
