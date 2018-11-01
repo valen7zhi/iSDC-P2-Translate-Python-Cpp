@@ -6,6 +6,8 @@
 */
 
 #include <vector>
+#include "debugging_helpers.h"
+
 using namespace std;
 
 /**

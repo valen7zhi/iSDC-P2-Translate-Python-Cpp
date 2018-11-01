@@ -9,49 +9,11 @@
 	this code work. 
 */
 
-#include "localizer.cpp"
 #include <algorithm>
+#include "simulate.h"
+#include "localizer.cpp"
 // #include "helpers.cpp"
 
-class Simulation {
-	
-private:
-	vector <char> get_colors() {
-		vector <char> all_colors;
-		char color;
-		int i,j;
-		for (i=0; i<height; i++) {
-			for (j=0; j<width; j++) {
-				color = grid[i][j];
-				if(std::find(all_colors.begin(), all_colors.end(), color) != all_colors.end()) {
-				    /* v contains x */
-				} else {
-					all_colors.push_back(color);
-					cout << "adding color " << color << endl;
-				    /* v does not contain x */
-				}
-			}
-		}
-		colors = all_colors;
-		num_colors = colors.size();
-		return colors;
-	}
-
-public: 
-	vector < vector <char> > grid;
-	vector < vector <float> > beliefs;
-
-	float blur, p_hit, p_miss, incorrect_sense_prob;
-
-	int height, width, num_colors;
-	
-	std::vector<int> true_pose;
-	std::vector<int> prev_pose;
-
-	vector <char> colors;
-	Simulation(vector < vector<char> >, float, float, vector <int>);
-
-};
 
 /**
 Constructor for the Simulation class.
@@ -70,6 +32,30 @@ Simulation::Simulation(vector < vector <char> > map,
 	incorrect_sense_prob = p_miss / (p_hit + p_miss);
 	true_pose = start_pos;
 	prev_pose = true_pose;
+}
+
+/**
+Grabs colors from the grid map.
+*/
+vector <char> Simulation::get_colors() {
+	vector <char> all_colors;
+	char color;
+	int i,j;
+	for (i=0; i<height; i++) {
+		for (j=0; j<width; j++) {
+			color = grid[i][j];
+			if(std::find(all_colors.begin(), all_colors.end(), color) != all_colors.end()) {
+				/* v contains x */
+			} else {
+				all_colors.push_back(color);
+				cout << "adding color " << color << endl;
+				/* v does not contain x */
+			}
+		}
+	}
+	colors = all_colors;
+	num_colors = colors.size();
+	return colors;
 }
 
 /**

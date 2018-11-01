@@ -1,5 +1,16 @@
 #include <iostream>
+#include "tests.h"
 #include "simulate.cpp"
+
+using namespace std;
+
+int main() {
+	cout << endl;
+	test_helpers();
+	test_localizer();
+	cout << endl;
+	return 0;
+}
 
 bool test_normalize() {
 	vector < vector <float> > unnormalized, normalized, result;
@@ -273,11 +284,3 @@ bool test_localizer() {
 // bool test_simulation() {
 // 	// todo 
 // }
-
-int main() {
-	cout << endl;
-	test_helpers();
-	test_localizer();
-	cout << endl;
-	return 0;
-}

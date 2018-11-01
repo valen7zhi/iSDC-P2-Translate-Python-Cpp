@@ -11,6 +11,7 @@
 	for working implementations which are written in python.
 */
 
+#include "localizer.h"
 #include "helpers.cpp"
 #include <stdlib.h>
 #include "debugging_helpers.cpp"

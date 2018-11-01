@@ -14,7 +14,8 @@
 #include <iostream>
 #include <cmath>
 #include <string>
-#include <fstream> 
+#include <fstream>
+#include "helpers.h"
 // #include "debugging_helpers.cpp"
 
 using namespace std;
