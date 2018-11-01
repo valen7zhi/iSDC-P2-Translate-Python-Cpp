@@ -48,6 +48,56 @@ vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
 }
 
 /**
+  TODO - implement this function 
+    
+    Implements robot motion by updating beliefs based on the 
+    intended dx and dy of the robot. 
+
+    For example, if a localized robot with the following beliefs
+
+    0.00  0.00  0.00
+    0.00  1.00  0.00
+    0.00  0.00  0.00 
+
+    and dx and dy are both 1 and blurring is 0 (noiseless motion),
+    than after calling this function the returned beliefs would be
+
+    0.00  0.00  0.00
+    0.00  0.00  0.00
+    0.00  0.00  1.00 
+
+  @param dy - the intended change in y position of the robot
+
+  @param dx - the intended change in x position of the robot
+
+    @param beliefs - a two dimensional grid of floats representing
+         the robot's beliefs for each cell before sensing. For 
+         example, a robot which has almost certainly localized 
+         itself in a 2D world might have the following beliefs:
+
+         0.01 0.98
+         0.00 0.01
+
+    @param blurring - A number representing how noisy robot motion
+           is. If blurring = 0.0 then motion is noiseless.
+
+    @return - a normalized two dimensional grid of floats 
+         representing the updated beliefs for the robot. 
+*/
+vector< vector <float> > move(int dy, int dx, 
+  vector < vector <float> > beliefs,
+  float blurring) 
+{
+
+  vector < vector <float> > newGrid;
+
+  // your code here
+
+  return blur(newGrid, blurring);
+}
+
+
+/**
 	TODO - implement this function 
     
     Implements robot sensing by updating beliefs based on the 
@@ -95,54 +145,4 @@ vector< vector <float> > sense(char color,
 	// your code here
 
 	return normalize(newGrid);
-}
-
-
-/**
-	TODO - implement this function 
-    
-    Implements robot motion by updating beliefs based on the 
-    intended dx and dy of the robot. 
-
-    For example, if a localized robot with the following beliefs
-
-    0.00  0.00  0.00
-    0.00  1.00  0.00
-    0.00  0.00  0.00 
-
-    and dx and dy are both 1 and blurring is 0 (noiseless motion),
-    than after calling this function the returned beliefs would be
-
-    0.00  0.00  0.00
-    0.00  0.00  0.00
-    0.00  0.00  1.00 
-
-	@param dy - the intended change in y position of the robot
-
-	@param dx - the intended change in x position of the robot
-
-   	@param beliefs - a two dimensional grid of floats representing
-   		   the robot's beliefs for each cell before sensing. For 
-   		   example, a robot which has almost certainly localized 
-   		   itself in a 2D world might have the following beliefs:
-
-   		   0.01 0.98
-   		   0.00 0.01
-
-    @param blurring - A number representing how noisy robot motion
-           is. If blurring = 0.0 then motion is noiseless.
-
-    @return - a normalized two dimensional grid of floats 
-    	   representing the updated beliefs for the robot. 
-*/
-vector< vector <float> > move(int dy, int dx, 
-	vector < vector <float> > beliefs,
-	float blurring) 
-{
-
-	vector < vector <float> > newGrid;
-
-	// your code here
-
-	return blur(newGrid, blurring);
 }
