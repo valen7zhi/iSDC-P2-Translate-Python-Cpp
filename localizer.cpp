@@ -39,11 +39,27 @@ using namespace std;
            0.25 0.25
            0.25 0.25
 */
-vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
-	vector< vector <float> > newGrid;
+vector<vector<float>> initialize_beliefs(vector<vector<char>> grid)
+{
+	vector<vector<float>> newGrid;
 
-	// your code here
-	
+	vector<float> row;
+
+	int height = grid.size();
+	int width = grid[0].size();
+	int area = height * width;
+	float rnum = 1.0 / (area);
+
+	for (int i = 0; i < grid.size(); i++)
+	{
+		row.clear();
+		for (int j = 0; j < grid[0].size(); j++)
+		{
+			row.push_back(rnum);
+		}
+		newGrid.push_back(row);
+	}
+
 	return newGrid;
 }
 
@@ -84,18 +100,31 @@ vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
     @return - a normalized two dimensional grid of floats 
          representing the updated beliefs for the robot. 
 */
-vector< vector <float> > move(int dy, int dx, 
-  vector < vector <float> > beliefs,
-  float blurring) 
+vector<vector<float>> move(int dy, int dx,
+						   vector<vector<float>> beliefs,
+						   float blurring)
 {
 
-  vector < vector <float> > newGrid;
+	vector<vector<float>> newGrid;
+	// vector<float> row;
 
-  // your code here
+	int row = beliefs.size();
+	int col = beliefs[0].size();
+	int new_r = 0;
+	int new_c = 0;
 
-  return blur(newGrid, blurring);
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			new_r = (i + dy + row) % row;
+			new_c = (j + dx + col) % col;
+			newGrid[new_r][new_c] = beliefs[i][j];
+		}
+	}
+
+	return blur(newGrid, blurring);
 }
-
 
 /**
 	TODO - implement this function 
@@ -134,15 +163,32 @@ vector< vector <float> > move(int dy, int dx,
     @return - a normalized two dimensional grid of floats 
     	   representing the updated beliefs for the robot. 
 */
-vector< vector <float> > sense(char color, 
-	vector< vector <char> > grid, 
-	vector< vector <float> > beliefs, 
-	float p_hit,
-	float p_miss) 
+vector<vector<float>> sense(char color,
+							vector<vector<char>> grid,
+							vector<vector<float>> beliefs,
+							float p_hit,
+							float p_miss)
 {
-	vector< vector <float> > newGrid;
+	vector<vector<float>> newGrid;
 
-	// your code here
+	int row = grid.size();
+	int col = grid[0].size();
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			newGrid[i][j] = grid[i][j];
+			if (grid[i][j] == color)
+			{
+				newGrid[i][j] *= p_hit;
+			}
+			else
+			{
+				newGrid[i][j] *= p_miss;
+			}
+		}
+	}
 
 	return normalize(newGrid);
 }
