@@ -96,38 +96,36 @@ vector<vector<float>> normalize(vector<vector<float>> grid)
 */
 vector<vector<float>> blur(vector<vector<float>> grid, float blurring)
 {
-
-	// vector<vector<float>> newGrid;
-
 	int height = grid.size();
 	int width = grid[0].size();
+	vector<vector<float>> newGrid(height, vector<float>(width, 0));
 
 	float center = 1.0 - blurring;
 	float corner = blurring / 12.0;
 	float adjcor = blurring / 6.0;
 
-	vector<vector<float>> newGrid{
+	vector<vector<float>> matrix1{
 		{corner, adjcor, corner},
 		{adjcor, center, adjcor},
 		{corner, adjcor, corner}};
 
-	// for (int i = 0; i < height; i++)
-	// {
-	// 	for (int j = 0; j < width; j++)
-	// 	{
-	// 		float grid_val = grid[i][j];
-	// 		for (int dx = -1; dx < 2; dx++)
-	// 		{
-	// 			for (int dy = -1; dy < 2; dy++)
-	// 			{
-	// 				float mult = our_matrix[dx + 1][dy + 1];
-	// 				int new_i = (i + dy + height) % height;
-	// 				int new_j = (j + dx + width) % width;
-	// 				newGrid[new_i][new_j] += mult * grid_val;
-	// 			}
-	// 		}
-	// 	}
-	// }
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			float grid_val = grid[i][j];
+			for (int dx = -1; dx < 2; dx++)
+			{
+				for (int dy = -1; dy < 2; dy++)
+				{
+					float mult = matrix1[dx + 1][dy + 1];
+					int new_i = (i + dy + height) % height;
+					int new_j = (j + dx + width) % width;
+					newGrid[new_i][new_j] += mult * grid_val;
+				}
+			}
+		}
+	}
 
 	return normalize(newGrid);
 }
